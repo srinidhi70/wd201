@@ -27,21 +27,23 @@ fs.readFile("registration.html", (err, registration) => {
   registrationContent = registration;
 });
 
-http.createServer((request, response) => {
-  let url = request.url;
-  response.writeHeader(200, { "Content-Type": "text/html" });
-  switch (url) {
-    case "/project":
-      response.write(projectContent);
-      response.end();
-      break;
-    case "/registration":
-      response.write(registrationContent);
-      response.end();
-      break;
-    default:
-      response.write(homeContent);
-      response.end();
-      break;
-  }
-}).listen(3000);
+http
+  .createServer((request, response) => {
+    let url = request.url;
+    response.writeHeader(200, { "Content-Type": "text/html" });
+    switch (url) {
+      case "/project":
+        response.write(projectContent);
+        response.end();
+        break;
+      case "/registration":
+        response.write(registrationContent);
+        response.end();
+        break;
+      default:
+        response.write(homeContent);
+        response.end();
+        break;
+    }
+  })
+  .listen(argv.port || 3000);
